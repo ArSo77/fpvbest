@@ -1,8 +1,8 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/channels">Channels</router-link>
-  </nav>
+<!--  <nav>-->
+<!--    <router-link to="/">Home</router-link> |-->
+<!--    <router-link to="/channels">Channels</router-link>-->
+<!--  </nav>-->
   <router-view/>
 </template>
 
@@ -12,6 +12,10 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
+}
+
+body {
+  margin: 16px;
 }
 //
 //nav {

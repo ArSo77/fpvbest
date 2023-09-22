@@ -126,7 +126,46 @@ const analogChannels: ChannelValues[] = [
   },
 ];
 
-export const wsChannels: ChannelValues[] = [];
+export const wsChannels: ChannelValues[] = [
+  {
+    id: 'walksnailRaceMode',
+    type: MAIN_TYPE.WS,
+    values: [
+      { id: 1, value: 5658 },
+      { id: 2, value: 5695 },
+      { id: 3, value: 5732 },
+      { id: 4, value: 5769 },
+      { id: 5, value: 5806 },
+      { id: 6, value: 5843 },
+      { id: 7, value: 5880 },
+      { id: 8, value: 5917 },
+    ],
+  },
+  {
+    id: 'walksnail25Mbps',
+    type: MAIN_TYPE.WS,
+    values: [
+      { id: 1, value: 5660 },
+      { id: 2, value: 5695 },
+      { id: 3, value: 5735 },
+      { id: 4, value: 55770 },
+      { id: 5, value: 5805 },
+      { id: 8, value: 5839 },
+      { id: 6, value: 5878 },
+      { id: 7, value: 5914 },
+    ],
+  },
+  {
+    id: 'walksnail50Mbps',
+    type: MAIN_TYPE.WS,
+    values: [
+      { id: 1, value: 5695 },
+      { id: 2, value: 5770 },
+      { id: 8, value: 5839 },
+      { id: 3, value: 5878 },
+    ],
+  },
+];
 
 export const allChannels: ChannelValues[] = [
   ...analogChannels,

@@ -33,20 +33,17 @@
         </div>
       </div>
     </div>
-    pickedChannels: {{ pickedChannels }}
-    <hr />
-    hazardLines: {{ hazardLines }}
   </div>
 </template>
 
 <script setup lang="ts">
 import { allChannels } from '@/utils/channelValues';
 import {
-  computed, h, Ref, ref,
+  computed, Ref, ref,
 } from 'vue';
 
-const freqStart = 5400;
-const freqEnd = 5950;
+const freqStart = 5645;
+const freqEnd = 5930;
 const freqMul = (freqEnd - freqStart) / 100;
 
 const pickedChannels: Ref<string[]> = ref([]);
@@ -91,7 +88,8 @@ const hazardLines = computed(() => {
 
 .systems {
   position: relative;
-  border: 3px solid black;
+  border: 2px solid black;
+  border-radius: 8px;
 }
 
 .system {
@@ -125,7 +123,7 @@ const hazardLines = computed(() => {
 
 .hazard {
   position: absolute;
-  width: 4%;
+  width: 6%;
   height: 100%;
   background: black;
   opacity: 30%;
@@ -134,7 +132,7 @@ const hazardLines = computed(() => {
 
 .pickLine {
   position: absolute;
-  width: 2%;
+  width: 5%;
   height: 100%;
   background: purple;
   opacity: 30%;
