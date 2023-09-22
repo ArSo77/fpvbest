@@ -18,7 +18,7 @@ const routes: Array<RouteRecordRaw> = [
 ];
 
 const router = createRouter({
-  history: createWebHistory('/'),
+  history: createWebHistory('/fpvbest/'),
   // history: createWebHistory(process.env.BASE_URL),
   routes,
 });
