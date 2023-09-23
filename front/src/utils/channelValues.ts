@@ -1,11 +1,11 @@
-const MAIN_TYPE = {
+export const SYSTEM_TYPE = {
   ANALOG: 'Analog',
   DJI: 'Dji',
   HDZERO: 'Hdzero',
   WS: 'Walksnail',
 } as const;
 
-type MainType = (typeof MAIN_TYPE)[keyof typeof MAIN_TYPE];
+export type SystemType = (typeof SYSTEM_TYPE)[keyof typeof SYSTEM_TYPE];
 
 type ChannelValue = {
   id: number;
@@ -14,13 +14,13 @@ type ChannelValue = {
 
 type ChannelValues = {
   id: string;
-  type: MainType;
+  type: SystemType;
   values: ChannelValue[];
 };
 
 const djiO3LowWithout: ChannelValues = {
   id: 'djiO3LowWithout',
-  type: MAIN_TYPE.DJI,
+  type: SYSTEM_TYPE.DJI,
   values: [
     { id: 1, value: 5768 },
     { id: 2, value: 5804 },
@@ -30,13 +30,13 @@ const djiO3LowWithout: ChannelValues = {
 
 const djiO3HighWithout: ChannelValues = {
   id: 'djiO3HighWithout',
-  type: MAIN_TYPE.DJI,
+  type: SYSTEM_TYPE.DJI,
   values: [{ id: 1, value: 5794 }],
 };
 
 const djiO3LowHam: ChannelValues = {
   id: 'djiO3LowHam',
-  type: MAIN_TYPE.DJI,
+  type: SYSTEM_TYPE.DJI,
   values: [
     { id: 1, value: 5669 },
     { id: 2, value: 5705 },
@@ -50,7 +50,7 @@ const djiO3LowHam: ChannelValues = {
 
 const djiO3HighHam: ChannelValues = {
   id: 'djiO3HighHam',
-  type: MAIN_TYPE.DJI,
+  type: SYSTEM_TYPE.DJI,
   values: [
     { id: 1, value: 5677 },
     { id: 2, value: 5794 },
@@ -61,7 +61,7 @@ const djiO3HighHam: ChannelValues = {
 const djiVista: ChannelValues[] = [
   {
     id: 'djiVista25',
-    type: MAIN_TYPE.DJI,
+    type: SYSTEM_TYPE.DJI,
     values: [
       { id: 1, value: 5660 },
       { id: 2, value: 5695 },
@@ -75,7 +75,7 @@ const djiVista: ChannelValues[] = [
   },
   {
     id: 'djiVista50',
-    type: MAIN_TYPE.DJI,
+    type: SYSTEM_TYPE.DJI,
     values: [
       { id: 1, value: 5677 },
       { id: 2, value: 5794 },
@@ -95,7 +95,7 @@ const djiChannels: ChannelValues[] = [
 const hdzeroChannels: ChannelValues[] = [
   {
     id: 'Hdzero',
-    type: MAIN_TYPE.HDZERO,
+    type: SYSTEM_TYPE.HDZERO,
     values: [
       { id: 1, value: 5658 },
       { id: 2, value: 5695 },
@@ -112,7 +112,7 @@ const hdzeroChannels: ChannelValues[] = [
 const analogChannels: ChannelValues[] = [
   {
     id: 'Raceband',
-    type: MAIN_TYPE.ANALOG,
+    type: SYSTEM_TYPE.ANALOG,
     values: [
       { id: 1, value: 5658 },
       { id: 2, value: 5695 },
@@ -129,7 +129,7 @@ const analogChannels: ChannelValues[] = [
 export const wsChannels: ChannelValues[] = [
   {
     id: 'walksnailRaceMode',
-    type: MAIN_TYPE.WS,
+    type: SYSTEM_TYPE.WS,
     values: [
       { id: 1, value: 5658 },
       { id: 2, value: 5695 },
@@ -143,7 +143,7 @@ export const wsChannels: ChannelValues[] = [
   },
   {
     id: 'walksnail25Mbps',
-    type: MAIN_TYPE.WS,
+    type: SYSTEM_TYPE.WS,
     values: [
       { id: 1, value: 5660 },
       { id: 2, value: 5695 },
@@ -157,7 +157,7 @@ export const wsChannels: ChannelValues[] = [
   },
   {
     id: 'walksnail50Mbps',
-    type: MAIN_TYPE.WS,
+    type: SYSTEM_TYPE.WS,
     values: [
       { id: 1, value: 5695 },
       { id: 2, value: 5770 },

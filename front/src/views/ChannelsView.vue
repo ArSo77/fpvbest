@@ -1,13 +1,24 @@
 <template>
   <div class="page">
+    <section class="actions">
+      <button class="actions__btn" @click="pickedChannels = []; pickedSystems = []">Clear</button>
+      <button
+        class="actions__btn"
+        :class="{ 'actions__btn--active': isSystemPicked(system) }"
+        @click="toggleSystem(system)"
+        v-for="system in Object.values(SYSTEM_TYPE)"
+        :key="system"
+      >
+        {{ system }}
+      </button>
+    </section>
     <div class="systems">
       <div
         class="hazard"
         v-for="line in hazardLines"
         :key="line + Math.random()"
         :style="{ left: (line - freqStart) / freqMul + '%' }"
-      >
-      </div>
+      ></div>
       <div
         class="pickLine"
         v-for="line in pickedLines"
@@ -16,7 +27,7 @@
       >
         p
       </div>
-      <div class="system" v-for="system in allChannels" :key="system.id">
+      <div class="system" v-for="system in filterChannels" :key="system.id">
         {{ system.id }}
         <div class="channels">
           <template v-for="chObj in system.values" :key="chObj.id">
@@ -37,19 +48,29 @@
 </template>
 
 <script setup lang="ts">
-import { allChannels } from '@/utils/channelValues';
+import { allChannels, SYSTEM_TYPE, SystemType } from '@/utils/channelValues';
 import {
-  computed, Ref, ref,
+  computed, onBeforeMount, Ref, ref,
 } from 'vue';
+
+const pickedChannels: Ref<string[]> = ref([]);
+const pickedSystems: Ref<string[]> = ref([]);
 
 const freqStart = 5645;
 const freqEnd = 5930;
 const freqMul = (freqEnd - freqStart) / 100;
 
-const pickedChannels: Ref<string[]> = ref([]);
+const toggleSystem = (type: SystemType) => {
+  const index = pickedSystems.value.indexOf(type);
+  if (index !== -1) {
+    pickedSystems.value.splice(index, 1);
+  } else {
+    pickedSystems.value.push(type);
+  }
+  window.localStorage.setItem('systems', JSON.stringify(pickedSystems.value));
+};
 
 const toggleChannel = (systemId: string, channelId: number, channelValue: number) => {
-  console.log(systemId, channelId);
   const channnel = `${systemId}:${channelId}:${channelValue}`;
   const index = pickedChannels.value.indexOf(channnel);
   if (index !== -1) {
@@ -57,6 +78,7 @@ const toggleChannel = (systemId: string, channelId: number, channelValue: number
   } else {
     pickedChannels.value.push(channnel);
   }
+  window.localStorage.setItem('channels', JSON.stringify(pickedChannels.value));
 };
 
 const isPicked = (systemId: string, channelId: number, channelValue: number) => {
@@ -64,20 +86,33 @@ const isPicked = (systemId: string, channelId: number, channelValue: number) => 
   return pickedChannels.value.indexOf(channnel) !== -1;
 };
 
+const isSystemPicked = (system: SystemType) => pickedSystems.value.indexOf(system) !== -1;
+
 const pickedLines = computed(() => pickedChannels.value.map((chObj) => chObj.split(':')[2]));
 // eslint-disable-next-line array-callback-return
 const hazardLines = computed(() => {
   const elements = pickedLines.value;
   const hazards = [];
   // eslint-disable-next-line no-plusplus
-  for (let i = 0; i < elements.length; i++) {
+  for (let chA = 0; chA < elements.length; chA++) {
     // eslint-disable-next-line no-plusplus
-    for (let j = i + 1; j < elements.length; j++) {
-      hazards.push(elements[i] * 2 - elements[j]);
-      hazards.push(elements[j] * 2 - elements[i]);
+    for (let chB = chA + 1; chB < elements.length; chB++) {
+      hazards.push(elements[chA] * 2 - elements[chB]);
+      hazards.push(elements[chB] * 2 - elements[chA]);
     }
   }
   return [...hazards];
+});
+
+const filterChannels = computed(() => allChannels.filter(
+  (channel) => pickedSystems.value.includes(channel.type),
+));
+
+onBeforeMount(() => {
+  const jsonChannels = window.localStorage.getItem('channels');
+  if (jsonChannels) pickedChannels.value.push(...JSON.parse(jsonChannels));
+  const jsonSystem = window.localStorage.getItem('systems');
+  if (jsonSystem) pickedSystems.value.push(...JSON.parse(jsonSystem));
 });
 </script>
 
@@ -85,6 +120,25 @@ const hazardLines = computed(() => {
 //.page {
 //  border: 1px solid red;
 //}
+
+.actions {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  padding: 8px;
+  &__btn {
+    background: transparent;
+    border: 2px solid rgba(173, 255, 47, 0.63);
+    border-radius: 16px;
+    padding: 8px 16px;
+    font-size: 16px;
+    color: greenyellow;
+    &--active {
+    background: rgba(173, 255, 47, 0.63);
+    color: black;
+  }
+  }
+}
 
 .systems {
   position: relative;
@@ -114,10 +168,11 @@ const hazardLines = computed(() => {
   justify-content: center;
   translate: -50%;
   &:hover {
-    border: 3px solid red;
+    border: 3px solid greenyellow;
   }
   &--active {
-    background: #42b983;
+    background: greenyellow;
+    color: black;
   }
 }
 
@@ -125,7 +180,7 @@ const hazardLines = computed(() => {
   position: absolute;
   width: 6%;
   height: 100%;
-  background: black;
+  background: #ff2222;
   opacity: 30%;
   translate: -50%;
 }
@@ -134,7 +189,7 @@ const hazardLines = computed(() => {
   position: absolute;
   width: 5%;
   height: 100%;
-  background: purple;
+  background: #61f858;
   opacity: 30%;
   translate: -50%;
 }
