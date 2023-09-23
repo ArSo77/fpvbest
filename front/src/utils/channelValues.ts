@@ -19,7 +19,7 @@ type ChannelValues = {
 };
 
 const djiO3LowWithout: ChannelValues = {
-  id: 'djiO3LowWithout',
+  id: 'DjiO3 Low',
   type: SYSTEM_TYPE.DJI,
   values: [
     { id: 1, value: 5768 },
@@ -29,13 +29,13 @@ const djiO3LowWithout: ChannelValues = {
 };
 
 const djiO3HighWithout: ChannelValues = {
-  id: 'djiO3HighWithout',
+  id: 'DjiO3 High',
   type: SYSTEM_TYPE.DJI,
   values: [{ id: 1, value: 5794 }],
 };
 
 const djiO3LowHam: ChannelValues = {
-  id: 'djiO3LowHam',
+  id: 'DjiO3 Low Ham',
   type: SYSTEM_TYPE.DJI,
   values: [
     { id: 1, value: 5669 },
@@ -49,7 +49,7 @@ const djiO3LowHam: ChannelValues = {
 };
 
 const djiO3HighHam: ChannelValues = {
-  id: 'djiO3HighHam',
+  id: 'DjiO3 High Ham',
   type: SYSTEM_TYPE.DJI,
   values: [
     { id: 1, value: 5677 },
@@ -60,7 +60,7 @@ const djiO3HighHam: ChannelValues = {
 
 const djiVista: ChannelValues[] = [
   {
-    id: 'djiVista25',
+    id: 'DjiVista 25',
     type: SYSTEM_TYPE.DJI,
     values: [
       { id: 1, value: 5660 },
@@ -74,7 +74,7 @@ const djiVista: ChannelValues[] = [
     ],
   },
   {
-    id: 'djiVista50',
+    id: 'DjiVista 50',
     type: SYSTEM_TYPE.DJI,
     values: [
       { id: 1, value: 5677 },
@@ -94,7 +94,7 @@ const djiChannels: ChannelValues[] = [
 
 const hdzeroChannels: ChannelValues[] = [
   {
-    id: 'Hdzero',
+    id: 'HDZero',
     type: SYSTEM_TYPE.HDZERO,
     values: [
       { id: 1, value: 5658 },
@@ -111,7 +111,7 @@ const hdzeroChannels: ChannelValues[] = [
 
 const analogChannels: ChannelValues[] = [
   {
-    id: 'Raceband',
+    id: 'Analog Raceband',
     type: SYSTEM_TYPE.ANALOG,
     values: [
       { id: 1, value: 5658 },
@@ -128,7 +128,7 @@ const analogChannels: ChannelValues[] = [
 
 export const wsChannels: ChannelValues[] = [
   {
-    id: 'walksnailRaceMode',
+    id: 'Walksnail Race Mode',
     type: SYSTEM_TYPE.WS,
     values: [
       { id: 1, value: 5658 },
@@ -142,13 +142,13 @@ export const wsChannels: ChannelValues[] = [
     ],
   },
   {
-    id: 'walksnail25Mbps',
+    id: 'Walksnail 25',
     type: SYSTEM_TYPE.WS,
     values: [
       { id: 1, value: 5660 },
       { id: 2, value: 5695 },
       { id: 3, value: 5735 },
-      { id: 4, value: 55770 },
+      { id: 4, value: 5770 },
       { id: 5, value: 5805 },
       { id: 8, value: 5839 },
       { id: 6, value: 5878 },
@@ -156,7 +156,7 @@ export const wsChannels: ChannelValues[] = [
     ],
   },
   {
-    id: 'walksnail50Mbps',
+    id: 'Walksnail 50',
     type: SYSTEM_TYPE.WS,
     values: [
       { id: 1, value: 5695 },

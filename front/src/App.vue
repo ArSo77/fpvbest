@@ -10,6 +10,7 @@
 html {
   background: #2c3e50;
   color: greenyellow;
+  width: 100vw;
 }
 
 #app {

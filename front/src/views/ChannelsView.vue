@@ -1,7 +1,15 @@
 <template>
   <div class="page">
     <section class="actions">
-      <button class="actions__btn" @click="pickedChannels = []; pickedSystems = []">Clear</button>
+      <button
+        class="actions__btn"
+        @click="
+          pickedChannels = [];
+          pickedSystems = [];
+        "
+      >
+        Clear
+      </button>
       <button
         class="actions__btn"
         :class="{ 'actions__btn--active': isSystemPicked(system) }"
@@ -24,11 +32,11 @@
         v-for="line in pickedLines"
         :key="line"
         :style="{ left: (line - freqStart) / freqMul + '%' }"
-      >
-        p
-      </div>
+      />
       <div class="system" v-for="system in filterChannels" :key="system.id">
-        {{ system.id }}
+        <span class="system__title">
+          {{ system.id }}
+        </span>
         <div class="channels">
           <template v-for="chObj in system.values" :key="chObj.id">
             <button
@@ -101,7 +109,7 @@ const hazardLines = computed(() => {
       hazards.push(elements[chB] * 2 - elements[chA]);
     }
   }
-  return [...hazards];
+  return [...hazards].filter((hazard) => hazard < freqEnd && hazard > freqStart);
 });
 
 const filterChannels = computed(() => allChannels.filter(
@@ -134,9 +142,9 @@ onBeforeMount(() => {
     font-size: 16px;
     color: greenyellow;
     &--active {
-    background: rgba(173, 255, 47, 0.63);
-    color: black;
-  }
+      background: rgba(173, 255, 47, 0.63);
+      color: black;
+    }
   }
 }
 
@@ -147,8 +155,15 @@ onBeforeMount(() => {
 }
 
 .system {
-  height: 90px;
+  height: 100px;
   border: 1px solid grey;
+  &__title {
+    padding: 6px;
+    display: block;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+  }
 }
 
 .channels {
@@ -180,7 +195,12 @@ onBeforeMount(() => {
   position: absolute;
   width: 6%;
   height: 100%;
-  background: #ff2222;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 0, 0, 0.3) 0%,
+    rgba(255, 0, 0, 0.9) 50%,
+    rgba(255, 0, 0, 0.3) 100%
+  );
   opacity: 30%;
   translate: -50%;
 }
@@ -189,7 +209,12 @@ onBeforeMount(() => {
   position: absolute;
   width: 5%;
   height: 100%;
-  background: #61f858;
+  background: linear-gradient(
+    90deg,
+    rgba(#61f858, 0.3) 0%,
+    rgba(#61f858, 1) 50%,
+    rgba(#61f858, 0.3) 100%
+  );
   opacity: 30%;
   translate: -50%;
 }
